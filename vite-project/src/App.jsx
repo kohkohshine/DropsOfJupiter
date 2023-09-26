@@ -1,16 +1,22 @@
-import Cards from './assets/components/cards';
-import NavBar from './assets/components/navbar';
+import SearchAppBar from './assets/components/navbar';
 import Footer from './assets/components/footer';
+import BasicPagination from './assets/components/pagination';
+import MyCard from './assets/components/cards';
 
-function App() { 
+export default function App() { 
 
   return (
     <>
-     <NavBar/>
-     <Cards/>
+     <SearchAppBar/>
+     <MyCard/>
+     <MyCard/>
+     <MyCard/>
+     <MyCard/>
+     <MyCard/>
+     <MyCard/>
+      <BasicPagination/>
      <Footer/>
-    </>
+     </>
   )
 }
 
-export default App
