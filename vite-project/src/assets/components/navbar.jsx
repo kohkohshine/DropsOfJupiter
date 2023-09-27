@@ -7,6 +7,10 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+import {useState} from 'react';
+import axios from 'axios';
+import MyCard from './cards';
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -50,7 +54,34 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+
 export default function SearchAppBar() {
+const [input,setInput] = useState('');
+const [data,setData] = useState([]);
+
+const fetchData = (query) => {
+  const url = `http://hn.algolia.com/api/v1/search?query=${query}`;
+  axios.get(url)
+    .then((response) => {
+      const results = response.data.hits;
+      setData(results);
+    })
+    .catch((error) => {
+      console.error('Error fetching data:', error);
+    });
+};
+
+  const handleChange = (value) => {
+    setInput(value);
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetchData(input); 
+    setInput('');
+  };
+
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -76,13 +107,27 @@ export default function SearchAppBar() {
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
+            <form onSubmit={handleSubmit}>
             <StyledInputBase
-              placeholder="Search…"
+            value={input}
+            onChange={(e) => handleChange(e.target.value)}
+              placeholder="Type to search…"
               inputProps={{ 'aria-label': 'search' }}
             />
+            </form>
+            
           </Search>
         </Toolbar>
       </AppBar>
+   {/* Display search results */}
+   <div>
+        {data.map((item) => (
+          <div key={item.objectID}>
+           <MyCard item={item}/>
+          </div>
+        ))}
+      </div>
+
     </Box>
   );
 }

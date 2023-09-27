@@ -3,6 +3,7 @@ import { Card, CardContent, Typography, Link } from '@mui/material';
 
 
 export default function MyCard({ item }) {
+
   return (
     <Card sx={{ display: 'flex', borderRadius: '8px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', marginTop: '16px',}}>
       {/* Card Content */}
@@ -12,14 +13,10 @@ export default function MyCard({ item }) {
           {item.title}
         </Typography>
 
-        {/* Author */}
-        <Typography variant="subtitle2" color="textSecondary">
-          Author: {item.author}
-        </Typography>
-
-        {/* Points */}
-        <Typography variant="body2" color="textSecondary">
-          Points: {item.points}
+  
+       {/* Points & Author */}
+      <Typography variant="body2" color="textSecondary">
+        {item.points} points by {item.author}
         </Typography>
 
         {/* Created At */}
@@ -31,6 +28,8 @@ export default function MyCard({ item }) {
         <Link href={item.url} target="_blank" rel="noopener noreferrer" color="primary">
           Read More
         </Link>
+  
+
       </CardContent>
     </Card>
   );

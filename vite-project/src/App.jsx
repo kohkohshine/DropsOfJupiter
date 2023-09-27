@@ -1,19 +1,32 @@
-{/*import {useEffect, useState} from 'react';*/}
+import {useEffect, useState} from 'react';
 import SearchAppBar from './assets/components/navbar';
 import Footer from './assets/components/footer';
 import BasicPagination from './assets/components/pagination';
 import MyCard from './assets/components/cards';
-import * as data from './assets/components/mockupdata.json';
+import axios from 'axios';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+import { responsiveFontSizes } from '@mui/material';
+{/*import * as data from './assets/components/mockupdata.json';*/}
 
 
 
 export default function App() { 
-{/*const [data,setData] = useState([]);
+const [data,setData] = useState({ hits: [] });  
+const [loading,setLoading] = useState(true);
+
+useEffect(()=> {
+axios
+.get('http://hn.algolia.com/api/v1/search?query=')
+.then((response) => {setData(response.data);setLoading(false)})
+.catch((error) => {console.error('error',error);setLoading(false)})
+},[])
 
 
 
-useEffect (()=>{
-  const url = 'https://gist.githubusercontent.com/MyElectricSheep/4f15c82c45409e06b220d4f7b67e1534/raw/106124f0632d8167001de62a12275dcbe660c2cd/hackernews.json';
+
+{/*useEffect (()=>{
+  const url = 'http://hn.algolia.com/api/v1/search?query=';
   fetch(url)
   .then(response=>response.json())
   .then(newData=>setData(newData))
@@ -24,7 +37,11 @@ useEffect (()=>{
 return (
   <>
     <SearchAppBar />
-    {data.hits.map((item) => (
+    {loading 
+    ? ( <Box sx={{ display: 'flex',justifyContent: 'center', marginTop: '5vh' }}>
+      <CircularProgress />
+    </Box> ) 
+    : (data.hits.map((item) => 
       <MyCard key={item.ObjectID} item={item} /> 
     ))}
     <BasicPagination />
