@@ -7,7 +7,7 @@ const Footer = () => {
     <AppBar position="static" color="primary">
       <Toolbar>
         <Typography variant="body1" color="inherit">
-          &copy; {new Date().getFullYear()} Your Website Name
+          &copy; {new Date().getFullYear()} Hacker News
         </Typography>
       </Toolbar>
     </AppBar>

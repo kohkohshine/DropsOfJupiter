@@ -5,7 +5,7 @@ import { Card, CardContent, Typography, Link } from '@mui/material';
 export default function MyCard({ item }) {
 
   return (
-    <Card sx={{ display: 'flex', borderRadius: '8px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', marginTop: '16px',}}>
+    <Card className='card'  sx={{ display: 'flex', borderRadius: '8px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', marginTop: '16px',}}>
       {/* Card Content */}
       <CardContent sx={{ flex: 1 }}>
         {/* Title */}

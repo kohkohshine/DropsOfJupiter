@@ -1,52 +1,24 @@
-import {useEffect, useState} from 'react';
-import SearchAppBar from './assets/components/navbar';
-import Footer from './assets/components/footer';
-import BasicPagination from './assets/components/pagination';
-import MyCard from './assets/components/cards';
-import axios from 'axios';
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
-import { responsiveFontSizes } from '@mui/material';
-{/*import * as data from './assets/components/mockupdata.json';*/}
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from './pages/Layout';
+import Home from './pages/home';
+import SearchResults from './pages/searchresults';
+import NoPage from './pages/nopage';
 
 
-
-export default function App() { 
-const [data,setData] = useState({ hits: [] });  
-const [loading,setLoading] = useState(true);
-
-useEffect(()=> {
-axios
-.get('http://hn.algolia.com/api/v1/search?query=')
-.then((response) => {setData(response.data);setLoading(false)})
-.catch((error) => {console.error('error',error);setLoading(false)})
-},[])
-
-
-
-
-{/*useEffect (()=>{
-  const url = 'http://hn.algolia.com/api/v1/search?query=';
-  fetch(url)
-  .then(response=>response.json())
-  .then(newData=>setData(newData))
-  .catch(error=>console.error('error',error))
-}, []);*/}
-
-
-return (
-  <>
-    <SearchAppBar />
-    {loading 
-    ? ( <Box sx={{ display: 'flex',justifyContent: 'center', marginTop: '5vh' }}>
-      <CircularProgress />
-    </Box> ) 
-    : (data.hits.map((item) => 
-      <MyCard key={item.ObjectID} item={item} /> 
-    ))}
-    <BasicPagination />
-    <Footer />
-  </>
-);
+export default function App() {
+ 
+  return (
+    <>
+      <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} /> 
+          <Route path="/home" element={<Home />} />
+          <Route path="/searchresults" element={<SearchResults />} />
+          <Route path="*" element={<NoPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+    </>
+  );
 }
-
