@@ -65,7 +65,7 @@ export default function SearchAppBar() {
 
   const fetchData = (query) => {
     setLoading(true);
-    const url = `http://hn.algolia.com/api/v1/search?query=${query}`;
+    const url = `https://hn.algolia.com/api/v1/search?query=${query}`;
     axios.get(url)
       .then((response) => {
         const results = response.data.hits;
