@@ -17,7 +17,7 @@ export default function SearchResults() {
 
   useEffect((query) => {
     axios
-      .get(`http://hn.algolia.com/api/v1/search?query=${query}`)
+      .get(`https://hn.algolia.com/api/v1/search?query=${query}`)
       .then((response) => {
         setData(response.data);
         setLoading(false);
