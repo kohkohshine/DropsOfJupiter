@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Card, CardContent, Typography, Link } from '@mui/material';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 
 export default function MyCard({ item }) {
@@ -26,7 +28,9 @@ export default function MyCard({ item }) {
 
         {/* Link to the Article */}
         <Link href={item.url} target="_blank" rel="noopener noreferrer" color="primary">
-          Read More
+        <Stack spacing={2} direction="row" sx={{marginTop:'10px'}}>
+      <Button variant="contained" sx={{fontSize:'12px'}}>Read More</Button>
+    </Stack>
         </Link>
   
 
