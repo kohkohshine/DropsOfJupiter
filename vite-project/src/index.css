@@ -1,0 +1,7 @@
+.card {
+    margin-top: 16px;};
+
+.card:hover {
+    transform: scale(1.2); 
+    transition: transform 0.3s ease-in-out;
+}
